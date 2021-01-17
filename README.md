@@ -19,4 +19,6 @@ TILogger().setPrefix("TILogger2").error("test")
 ### Install
 
 #### Gradle
-`implementation 'ichise:tilogger:(insert latest version)'
+```
+implementation 'ichise:tilogger:(insert latest version)'
+```
