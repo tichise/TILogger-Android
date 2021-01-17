@@ -48,33 +48,70 @@ apply plugin: 'maven-publish'
 
 publishing {
     publications {
-        MyPublication(MavenPublication) {
-            groupId 'tichise'
-            artifactId 'tilogger'
-            version '1.0.1'
+        bintray(MavenPublication) {
+            // artifact("$buildDir/libs/${pj.libraryName}-${version}.jar")
+            groupId = pj.groupId
+            artifactId = pj.libraryName
+            version = pj.versions.name
+
+            // artifact sourcesJar
+
+            pom.withXml {
+                def node = asNode()
+
+                def licenses = node.appendNode("licenses")
+                appendLicense(licenses, "The MIT License", "https://opensource.org/licenses/MIT", "repo")
+
+                appendScm(node, pj.scmConnection, pj.githubUrl)
+
+                def dependencies = node.appendNode("dependencies")
+                configurations.api.dependencies.each {
+                    appendDependency(dependencies, it.group, it.name, it.version, "compile")
+                }
+                configurations.implementation.dependencies.each {
+                    appendDependency(dependencies, it.group, it.name, it.version, "runtime")
+                }
+            }
         }
     }
+}
+
+static def appendLicense(parentNode, name, url, distribution) {
+    def node = parentNode.appendNode("license")
+    node.appendNode("name", name)
+    node.appendNode("url", url)
+    node.appendNode("distribution", distribution)
+}
+
+static def appendScm(parentNode, connection, url) {
+    def node = parentNode.appendNode("scm")
+    node.appendNode("connection", connection)
+    node.appendNode("url", url)
+}
+
+static def appendDependency(parentNode, groupId, artifactId, version, scope) {
+    def node = parentNode.appendNode("dependency")
+    node.appendNode("groupId", groupId)
+    node.appendNode("artifactId", artifactId)
+    node.appendNode("version", version)
+    node.appendNode("scope", scope)
 }
 
 bintray {
     user = project.hasProperty('bintrayUser') ? project.property('bintrayUser') : System.getenv('BINTRAY_USER')
     key = project.hasProperty('bintrayApiKey') ? project.property('bintrayApiKey') : System.getenv('BINTRAY_API_KEY')
-    publications = ['MyPublication']
+    publications = ["bintray"]
+
     pkg {
-        repo = 'maven'
-        name = 'tilogger'
-        licenses = ['MIT']
-        websiteUrl = 'https://github.com/tichise/tilogger-android.git'
-        vcsUrl = 'https://github.com/tichise/tilogger-android.git'
-        issueTrackerUrl = 'https://github.com/tichise/tilogger-android/issues'
-        labels = ['logger', 'kotlin']
+        repo = "maven"
+        name = pj.groupId + "." + pj.libraryName
+        licenses = ["MIT"]
+        websiteUrl = pj.siteUrl
+        vcsUrl = pj.githubUrl + ".git"
+        issueTrackerUrl = pj.githubUrl + "/issues"
         publicDownloadNumbers = true
         version {
-            name = '1.0.1'
+            name = pj.versions.name
         }
     }
-}
-
-tasks.named("bintrayUpload") {
-    dependsOn("assemble")
 }

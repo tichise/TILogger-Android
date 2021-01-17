@@ -12,6 +12,24 @@ buildscript {
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
+
+    def versionMajor = 1
+    def versionMinor = 0
+    def versionPatch = 5
+
+    ext {
+        pj = [
+                libraryName : "tilogger",
+                versions : [
+                        name: "${versionMajor}.${versionMinor}.${versionPatch}",
+                        code: versionMajor * 10000 + versionMinor * 100 + versionPatch
+                ],
+                groupId      : "tichise",
+                siteUrl      : "https://github.com/tichise/tilogger-android",
+                githubUrl    : "https://github.com/tichise/tilogger-android",
+                scmConnection: "scm:git:https://github.com/tichise/tilogger-android.git"
+        ]
+    }
 }
 
 allprojects {
