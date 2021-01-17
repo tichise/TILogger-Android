@@ -63,7 +63,8 @@ bintray {
     publications = ['MyPublication']
     pkg {
         repo = "maven"
-        name = pj.groupId + "." + pj.libraryName
+        name = pj.libraryName
+        // userOrg = ""
         licenses = pj.licenses
         websiteUrl = pj.siteUrl
         vcsUrl = pj.githubUrl + ".git"
