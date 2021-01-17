@@ -49,10 +49,9 @@ apply plugin: 'maven-publish'
 publishing {
     publications {
         MyPublication(MavenPublication) {
-            // from components.java
-            groupId pj.groupId
-            artifactId pj.libraryName
-            version pj.versions.name
+            groupId 'tichise'
+            artifactId 'tilogger'
+            version '1.0.0'
         }
     }
 }
@@ -62,15 +61,15 @@ bintray {
     key = project.hasProperty('bintrayApiKey') ? project.property('bintrayApiKey') : System.getenv('BINTRAY_API_KEY')
     publications = ['MyPublication']
     pkg {
-        repo = "maven"
-        name = pj.groupId + "." + pj.libraryName
-        licenses = pj.licenses
-        websiteUrl = pj.siteUrl
-        vcsUrl = pj.githubUrl + ".git"
-        issueTrackerUrl = pj.githubUrl + "/issues"
+        repo = 'maven'
+        name = 'tilogger'
+        // userOrg = user
+        licenses = ['MIT']
+        vcsUrl = 'https://github.com/tichise/tilogger-android.git'
+        labels = ['logger', 'kotlin']
         publicDownloadNumbers = true
         version {
-            name = project.version
+            name = '1.0.0'
         }
     }
 }
