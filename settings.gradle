@@ -1,3 +1,2 @@
 include ':tilogger'
-include ':library'
 rootProject.name = "tilogger"
