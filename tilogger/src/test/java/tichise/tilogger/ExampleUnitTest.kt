@@ -1,4 +1,4 @@
-package tichise.library
+package tichise.tilogger
 
 import org.junit.Test
 
