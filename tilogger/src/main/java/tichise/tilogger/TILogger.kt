@@ -4,7 +4,7 @@ import android.util.Log
 
 object TILogger {
     private val tag = "TILogger"
-    
+
     @JvmStatic
     fun debug(message: String) {
         val stackTrace = Thread.currentThread().stackTrace[3]
