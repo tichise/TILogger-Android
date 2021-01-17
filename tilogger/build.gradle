@@ -63,7 +63,6 @@ bintray {
     pkg {
         repo = 'maven'
         name = 'tilogger'
-        // userOrg = user
         licenses = ['MIT']
         vcsUrl = 'https://github.com/tichise/tilogger-android.git'
         labels = ['logger', 'kotlin']
