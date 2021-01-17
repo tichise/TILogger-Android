@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.library'
     id 'kotlin-android'
+    id "com.jfrog.bintray" version "1.7"
 }
 
 android {
@@ -41,4 +42,35 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+}
+
+apply plugin: 'maven-publish'
+
+publishing {
+    publications {
+        MyPublication(MavenPublication) {
+            // from components.java
+            groupId pj.groupId
+            artifactId pj.libraryName
+            version pj.versions.name
+        }
+    }
+}
+
+bintray {
+    user = project.hasProperty('bintrayUser') ? project.property('bintrayUser') : System.getenv('BINTRAY_USER')
+    key = project.hasProperty('bintrayApiKey') ? project.property('bintrayApiKey') : System.getenv('BINTRAY_API_KEY')
+    publications = ['MyPublication']
+    pkg {
+        repo = "maven"
+        name = pj.groupId + "." + pj.libraryName
+        licenses = pj.licenses
+        websiteUrl = pj.siteUrl
+        vcsUrl = pj.githubUrl + ".git"
+        issueTrackerUrl = pj.githubUrl + "/issues"
+        publicDownloadNumbers = true
+        version {
+            name = project.version
+        }
+    }
 }
