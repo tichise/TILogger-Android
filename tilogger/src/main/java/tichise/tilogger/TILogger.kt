@@ -2,7 +2,7 @@ package tichise.tilogger
 
 import android.util.Log
 
-class TILogger {
+open class TILogger {
     private var mPrefix = "TILogger"
 
     public fun setPrefix(prefix: String) : TILogger {
