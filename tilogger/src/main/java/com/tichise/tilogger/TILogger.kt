@@ -1,4 +1,4 @@
-package tichise.tilogger
+package com.tichise
 
 import android.util.Log
 

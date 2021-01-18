@@ -2,7 +2,7 @@ package tichise.samples
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import tichise.tilogger.TILogger
+import com.tichise.TILogger
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
