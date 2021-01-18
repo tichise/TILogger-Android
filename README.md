@@ -1,3 +1,5 @@
+[ ![Download](https://api.bintray.com/packages/ichise/maven/com.tichise.tilogger/images/download.svg?version=1.0.7) ](https://bintray.com/ichise/maven/com.tichise.tilogger/1.0.7/link)
+
 # TILogger Android
 
 TILogger is a simple logger for kotlin.
