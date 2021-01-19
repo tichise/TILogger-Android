@@ -15,7 +15,7 @@ buildscript {
 
     def versionMajor = 1
     def versionMinor = 0
-    def versionPatch = 8
+    def versionPatch = 9
 
     ext {
         pj = [
