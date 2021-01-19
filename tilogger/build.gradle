@@ -49,12 +49,10 @@ apply plugin: 'maven-publish'
 publishing {
     publications {
         bintray(MavenPublication) {
-            // artifact("$buildDir/libs/${pj.libraryName}-${version}.jar")
+            artifact("$buildDir/outputs/aar/${pj.libraryName}-release.aar")
             groupId = pj.groupId
             artifactId = pj.libraryName
             version = pj.versions.name
-
-            // artifact sourcesJar
 
             pom.withXml {
                 def node = asNode()
